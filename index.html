@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Karla:400,700|Merriweather:900" rel="stylesheet">
+	<title>Good Books, Great Deals</title>
+	<link rel="shortcut icon" type="image/png" href="assets/gbgd_favicon.png"/>
+	<link rel="stylesheet" type="text/css" href="assets/gbgd_css.css">
+	<link rel="stylesheet" type="text/css" href="assets/gbgd_css_home.css">
+	<meta name="description" content="Looking for a new book? Get popular books with trusted recommendations for great prices at Good Books, Great Deals.">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127410591-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-127410591-1');
+	</script>
+</head>
+<body>
+
+<div class="gbgd_page_c" id="list_c" v-cloak>
+
+<div class="gbgd_page_left">
+
+	<a class="gbgd_title" href="https://kcsluis.github.io">Good Books, Great Deals</a>
+	<div id="gbgd_nav">
+		<div class="gbgd_nav_c" v-for="item in manifest" v-cloak>
+			<a class="gbgd_nav_link" v-bind:href="item.url">
+				<div class="gbgd_nav_header">{{ item.what_pretty }}</div>
+				<div class="gbgd_nav_list">from {{ item.who_pretty }}</div>
+			</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="gbgd_page_right">
+
+	<div class="gbgd_bg_background_img">
+		<div class="gbgd_title_c">
+			<div class="gbgd_majortitle">Good Books, Great Deals</div>
+			<div class="gbgd_mt_sub">Popular books. Trusted recommendations. Great prices.</div>
+			<a class="gbgd_primary_cta" href="http://eepurl.com/dJNxdo" target="_blank">Get new deals and recommendations weekly<img class="gbgd_whticon_email_sm" src="assets/email_icon.png"></a>
+		</div>
+	</div>
+
+	<div class="pick_highlight">Our Favorite Lists</div>
+	<div class="gbgd_list_overflowcontainer">
+		<div id="list_oflists" v-cloak>
+			<a v-for="item in manifest" class="list_card" v-bind:href="item.url" target="_blank">{{ item.what_pretty }} from {{ item.who_pretty }}
+			</a>
+		</div>
+	</div>
+
+	<div class="pick_highlight">Our Favorite Book This Week</div>
+	<div>
+		<div class="list_block" v-for="book in books">
+			<a class='list_left' v-bind:href="book.url" target="_blank" v-on:click="event_book">
+				<img class="gbgd_image" v-bind:src="book.img">			
+				<div class="gbgd_money">
+					<div class="gbgd_money_sm">Get it for</div>
+					<div>{{ book.price_format }}</div>
+				</div>
+				<div class="gbgd_binding">{{ book.binding }}</div>
+			</a>
+			<div class='list_right'>
+				<a class="gbgd_booktitle" v-bind:href="book.url" target="_blank">{{ book.title_y }}</a>
+				<div class="gbgd_bookauthor">{{ book.author }}</div>
+				<div class="gbgd_ratings_short">{{ book.rating_format }}/5.0 stars, {{ book.ratings_format }} readers</div>
+				<div class="gbgd_tag_c">
+					<div class="gbgd_tag gbgd_tag1">
+						#{{ book.rank }} Pick
+					</div>
+					<div class="gbgd_tag" v-if="book.rating >= 4.2">
+						Highly-rated
+					</div>
+					<div class="gbgd_tag" v-if="book.rating_count > 10000">
+						Popular with readers
+					</div>
+					<div class="gbgd_tag" v-if="book.price_i > 66">
+						Great price
+					</div>
+					<div class="gbgd_tag caution" v-if="book.rating_count < 100">
+						Few reviews
+					</div>
+					<div class="gbgd_tag caution" v-if="book.rating <= 3.5">
+						Poorly-rated
+					</div>
+					<div class="gbgd_tag deal" v-if="book.price < 1000">
+						Under $10
+					</div>
+					<div class="gbgd_tag deal" v-if="book.percent_off > 20">
+						{{ book.percent_off }}% off
+					</div>
+					<div class="gbgd_tag" v-if="book.page_count > 500">
+						Long read: {{ book.page_count }} pages
+					</div>
+					<div class="gbgd_tag" v-if="book.page_count < 200">
+						Short read: {{ book.page_count }} pages
+					</div>
+				</div>
+				<p class="gbgd_book_desc">{{ book.description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="gbgd_about">
+		<div class="pick_highlight">About Good Books, Great Deals</div>
+		<p>I love books—real books, physical books, books that you can touch and smell, books that you can share with a friend, books that you can collect and stack on your bookshelf.</p>
+		<p>I also love deals—I get a thrill when I discover a great book on the discount shelf of a local bookstore. Finding those hidden gems is a real delight for me. Maybe it's a delight for you, too. 😄</p>
+		<p>I'm building Good Books, Great Deals to help people feel that delight whenever they want—to help people read more and spend less.</p>
+	</div>
+
+	<div class="gbgd_text">
+		<div class="pick_highlight">Contact Us</div>
+		<a href="https://twitter.com/goodgreatbooks" target="_blank">@goodgreatbooks on Twitter</a>
+		<a href="http://eepurl.com/dJNxdo" target="_blank">Sign up for our twice-a-month newsletter</a>
+	</div>
+
+</div>
+
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+
+<script>
+
+queue()
+	.defer(d3.json, "gbgd_manifest.json")
+	.defer(d3.csv, "homepage_item.csv")
+	.await(ready);
+
+function ready(error, manifest, homepage_item) {
+
+	manifest.sort(function(x, y){
+	   return +x.order - +y.order;
+	});
+	homepage_item.sort(function(x, y){
+	   return +y.new_score - +x.new_score;
+	});
+
+	var mFormat = d3.format("$,.2f");
+	homepage_item.forEach(function(d){
+		d.price_format = mFormat(d.price/100);
+	});
+	var rFormat = d3.format(".1f");
+	homepage_item.forEach(function(d){
+		d.rating_format = rFormat(d.rating);
+	});
+	var cFormat = d3.format(",.2r");
+	homepage_item.forEach(function(d){
+		d.ratings_format = cFormat(d.rating_count);
+	});
+	var vFormat = d3.format(".0f");
+	homepage_item.forEach(function(d,i){
+		d.k_score_format = vFormat(d.k_score);
+		d.price_index_format = vFormat(d.price_index);
+		d.rating_index_format = vFormat(d.rating_index);
+		d.rating_count_index_format = vFormat(d.rating_count_index);
+		d.rank = i+1;
+	});
+
+	var app = new Vue({
+		el: '#list_c',
+		data: {
+			books: homepage_item,
+			manifest
+		},
+		methods: {
+			event_book: function(event) {
+				ga('send', 'event', 'book_link', 'click_to_amazon');
+			}
+		}
+	});
+
+};
+	
+</script>
+
+</html>
